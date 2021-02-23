@@ -4,6 +4,8 @@ import { person as Person} from './Person/Person'; //named import
 //import Person from './Person/Person'; //default import
 import Forms from './forms/Forms';
 import FragmentImplementation from './fragments/FragmentImplementation';
+import LifecyclePractice from './lifecycle/lifecycle';
+import Parent from './lifecycle/parent';
 
 class App extends Component {
    constructor(props){
@@ -59,8 +61,10 @@ handleNewVideos(){
     
     return (
       <div className="App">
-     <FragmentImplementation  />
-      <Forms/>
+      <LifecyclePractice/>
+      <Parent/>
+   {/*<FragmentImplementation  />
+      <Forms/> */}  
       {/* This is an inline css block */}
       {/*  <h1 style={{fontWeight:'bold'}}>Hi I am React</h1> 
       <div onClick={this.handleVideos}>Handle Videos</div>
