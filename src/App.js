@@ -1,82 +1,45 @@
 import React, { Component } from 'react';
 import './App.css';
-import { person as Person} from './Person/Person'; //named import
-//import Person from './Person/Person'; //default import
-import Forms from './forms/Forms';
-import FragmentImplementation from './fragments/FragmentImplementation';
-import LifecyclePractice from './lifecycle/lifecycle';
-import Parent from './lifecycle/parent';
+import { HashRouter as Router, Link, Switch,Route } from 'react-router-dom';
+import { Home } from './Routing/Home';
+import { Contact } from './Routing/Contact';
+import { About } from './Routing/About';
+import ContactName from './Routing/ContactName';
 
+/*
+First we installed the router package by running the command "npm install react-router-dom"
+then we created 3 pages home,contact and about, In the main app.js file we imported the browser/hash Router as router
+ which is the main component in our render part, after that Link was import which is used to specify the path of the page.
+ Switch component is then imported which is used for navigation from one route to other as it takes the route component and we have to specify the path there.
+ */
 class App extends Component {
-   constructor(props){
-   super()
-    this.state={
-      persons:[
-        {name:'vans' , age:22},
-        {name:'Vaibhav' , age:21},
-        {name:'Vansh' , age:19}
-      ],
-      otherState:'some other state'
+  constructor(props) {
+    super(props)
+    this.state = {
     }
-    //telling the function handlevideos that the this keyword if used within the function will now point to the class object. 
-    this.handleVideos=this.handleVideos.bind(this)
- }
- //these are class properties version to use state
-  // state={
-  //   persons:[
-  //     {name:'Vanshika' , age:22},
-  //     {name:'Vaibhav' , age:21},
-  //     {name:'Vansh' , age:19}
-  //   ],
-  //   otherState:'some other state'
-  // }
-  switchNameHandler=()=>{
-    this.setState({
-      persons:[
-        {name:'Vanshi' , age:22},
-        {name:'Vaibhav' , age:21},
-        {name:'Vansh' , age:15}
-      ]
-    })
+
   }
-   
-renderTrialHandler=()=>{
-  this.setState({
- otherState:'New values'
-  })
-}
+  render() {
 
-
-handleVideos(){
-  console.log(this)
-}
-
-handleNewVideos(){
-  //on the onclick event the function is pointing to the objetcs in the class by using the arrow function.
-  console.log(this)
-}
-
-  render() 
-  {
-    
     return (
-      <div className="App">
-      <LifecyclePractice/>
-      <Parent/>
-   {/*<FragmentImplementation  />
-      <Forms/> */}  
-      {/* This is an inline css block */}
-      {/*  <h1 style={{fontWeight:'bold'}}>Hi I am React</h1> 
-      <div onClick={this.handleVideos}>Handle Videos</div>
-      <div onClick={()=>this.handleNewVideos()}>Handle</div>
-      <h1 className="title">{this.state.otherState}</h1>
-      <div onClick={this.renderTrialHandler}>Update Other State</div>
-      <button onClick={this.switchNameHandler}>Switch Names</button>
-      <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-      <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My hobbies:Dancing </Person>
-      <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>*/}
-     
-      </div>
+      <Router>
+        <div className="App">
+          <nav>
+            <ul>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/Contact'>Contact</Link></li>
+              <li><Link to='/About'>About</Link></li>
+              <li><Link to='/ContactName'>Contact Name</Link></li>
+            </ul>
+          </nav>
+      <Switch>
+      <Route exact path='/'><Home/></Route>
+      <Route exact path='/Contact'  component={Contact}></Route>
+      <Route exact path='/About'><About/></Route>
+      <Route path='/:id' component={ContactName}/>
+     </Switch>
+        </div>
+      </Router>
     );
   }
 }
