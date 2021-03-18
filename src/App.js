@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { HashRouter as Router, Link, Switch,Route } from 'react-router-dom';
-import { Home } from './Routing/Home';
-import { Contact } from './Routing/Contact';
-import { About } from './Routing/About';
-import ContactName from './Routing/ContactName';
-import TrialBasis from './Teaching';
-import Hooks from './hooks/hooks';
-import HookCounter from './hooks/hookCounter';
+import clickCounter from './hoc/clickCounter';
 import ArrayHooks from './hooks/arrayCounter';
-import UseEffect from './hooks/useeffectHook';
+import ComponentC from './hooks/componentC';
+import DataFetch from './hooks/dataFetching';
+import HookCounter from './hooks/hookCounter';
 import HookMouse from './hooks/hookMouse';
+import Hooks from './hooks/hooks';
 import Mouse from './hooks/Mouse';
 import Timer from './hooks/timer';
-import DataFetch from './hooks/dataFetching';
-
+import UseEffect from './hooks/useeffectHook';
+import { UserProvider } from './hooks/userContext';
+import ParentRef from './refs/refParent';
+import { About } from './Routing/About';
+import { Contact } from './Routing/Contact';
+import ContactName from './Routing/ContactName';
+import { Home } from './Routing/Home';
+import TrialBasis from './Teaching';
 /*
 First we installed the router package by running the command "npm install react-router-dom"
 then we created 3 pages home,contact and about, In the main app.js file we imported the browser/hash Router as router
@@ -48,7 +51,11 @@ class App extends Component {
               <li><Link to='/Mouse'>class effect</Link></li>
               <li><Link to='/timer'>Timer</Link></li>
               <li><Link to='/dataFetch'>Data</Link></li>
-            </ul>
+              <li><Link to='/componentC'>C</Link></li>
+              <li><Link to='/refParent'>Ref</Link></li>
+              <li><Link to='/clickCounter'>Click Counter</Link></li>
+   
+              </ul>
           </nav>
       <Switch>
       <Route exact path='/'><Home/></Route>
@@ -62,8 +69,12 @@ class App extends Component {
       <Route exact path='/array'><ArrayHooks/></Route>
       <Route exact path='/useeffect'><UseEffect/></Route>
       <Route exact path='/Contact'  component={Contact}></Route>
+      <Route exact path='/clickCounter' component={clickCounter}></Route>
       <Route exact path='/About'><About/></Route>
-
+      {/* provider value is providing values for all the desendent values 
+      */}
+      <Route exact path='/componentC'><UserProvider value="Vanshika"><ComponentC/></UserProvider></Route>
+      <Route exact path='/refParent'><ParentRef/></Route>
       <Route path='/:id' component={ContactName}/>
       
      </Switch>

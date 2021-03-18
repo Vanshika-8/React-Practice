@@ -20,7 +20,8 @@ function HookMouse() {
     }
     }, [])
     //the effect is re-rendered everytime, we have to specify the dependency array
-    //this particular event is exectued on inital render
+	//this particular event is exectued on inital render
+	//useeffect runs at every render so to make it run only once we need that dependency array
    
 	return (
 		<div>
